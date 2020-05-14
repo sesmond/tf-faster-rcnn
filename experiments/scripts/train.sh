@@ -37,7 +37,6 @@ echo "You have selected $NET "
 #TODO 数据集选择，多选等
 DATASET=gen
 
-NET=$3
 
 array=( $@ )
 len=${#array[@]}
