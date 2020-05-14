@@ -46,7 +46,7 @@ def init_coco():
 def init_gen():
     print("初始化数据")
     from datasets.general_data import general
-    for split in ['train', 'val', 'minival', 'valminusminival', 'trainval']:
+    for split in ['train', 'test']:
         name = 'gen_{}'.format(split)
         # lambda 只是定义了方法，不在这里调用
         __sets[name] = (lambda split=split: general(split))
