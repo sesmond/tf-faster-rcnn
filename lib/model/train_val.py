@@ -274,6 +274,7 @@ class SolverWrapper(object):
         next_stepsize = stepsizes.pop()
 
       timer.tic()
+      #TODO 从这里度图片
       # Get training data, one batch at a time
       blobs = self.data_layer.forward()
 
@@ -364,7 +365,9 @@ def train_net(network, imdb, roidb, valroidb, output_dir, tb_dir,
               pretrained_model=None,
               max_iters=40000):
   """Train a Faster R-CNN network."""
+  #训练集数据读取
   roidb = filter_roidb(roidb)
+  # 验证集
   valroidb = filter_roidb(valroidb)
 
   tfconfig = tf.ConfigProto(allow_soft_placement=True)
