@@ -66,8 +66,8 @@ set -x
 
 if [ ! -f ${NET_FINAL}.index ]; then
   if [[ ! -z  ${EXTRA_ARGS_SLUG}  ]]; then
-    CUDA_VISIBLE_DEVICES=${GPU_ID} time
-    nohup python ./tools/trainval_net.py \
+    CUDA_VISIBLE_DEVICES=${GPU_ID}
+    nohup  time python ./tools/trainval_net.py \
       --weight data/imagenet_weights/${NET}.ckpt \
       --imdb ${TRAIN_IMDB} \
       --imdbval ${TEST_IMDB} \
@@ -79,8 +79,8 @@ if [ ! -f ${NET_FINAL}.index ]; then
       TRAIN.STEPSIZE ${STEPSIZE} ${EXTRA_ARGS} \
       >> ./logs/console_$Date.log 2>&1
   else
-    CUDA_VISIBLE_DEVICES=${GPU_ID} time
-    nohup python ./tools/trainval_net.py \
+    CUDA_VISIBLE_DEVICES=${GPU_ID}
+    nohup time python ./tools/trainval_net.py \
       --weight data/imagenet_weights/${NET}.ckpt \
       --imdb ${TRAIN_IMDB} \
       --imdbval ${TEST_IMDB} \
