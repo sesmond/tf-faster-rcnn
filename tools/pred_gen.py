@@ -80,6 +80,10 @@ def vis_detections(im, class_name, dets, thresh=0.5):
     plt.draw()
 
 
+def draw(im,box):
+    cv2.polylines(im, [box.astype(np.int32).reshape((-1, 1, 2))], True, color=(255, 255, 0),
+                                  thickness=2)
+
 def demo(sess, net, im_file):
     """Detect object classes in an image using pre-computed object proposals."""
     # Load the demo image
@@ -102,22 +106,31 @@ def demo(sess, net, im_file):
         cls_ind += 1 # because we skipped background
         #TODO 4-8?  想只筛选出这个类别的box，但是逻辑没看懂
         cls_boxes = boxes[:, 4*cls_ind:4*(cls_ind + 1)]
+        # boxes 应该是对应的每个分类都有两个点 然后按分类顺序往后排
+        # shape (300,4) 这里是取了后四个
         print("cls_boxes:",cls_boxes.shape,cls_boxes[0])
         cls_scores = scores[:, cls_ind]
+        # 找出对应分类的score？
         print("cls_scores:",cls_scores.shape,cls_scores[0])
 
-        # 合成box和框
+        # 合成box和框（300，5）
         dets = np.hstack((cls_boxes,
                           cls_scores[:, np.newaxis])).astype(np.float32)
-        #TODO NMS筛选之后剩下的
+
+        #TODO NMS筛选之后剩下的 IOU超过多少的过滤掉，返回的是？应该是对应的序号(0-300)
         keep = nms(dets, NMS_THRESH)
         print("keep:",keep)
         dets = dets[keep, :]
-        print("dets:",dets)
-        print("cls:",cls)
-
+        # print("dets:",dets)
+        # print("cls:",cls)
+        # IOU过滤 后的框+概率
         # TODO write output
-        vis_detections(im, cls, dets, thresh=CONF_THRESH)
+        for det in dets:
+            box = det[:-1]
+            draw(im,box)
+        base_name = os.path.basename(im_file)
+        cv2.imwrite("data/pred/output1/"+str(cls)+base_name ,im)
+        # vis_detections(im, cls, dets, thresh=CONF_THRESH)
 
 
 if __name__ == '__main__':
