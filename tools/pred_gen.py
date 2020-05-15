@@ -128,8 +128,9 @@ def demo(sess, net, im_file):
         for det in dets:
             if det[-1] > 0.8:
                 box = det[:-1]
-                print("画框：",box)
                 new_box=[box[0],box[1],box[2],box[1],box[2],box[3],box[0],box[3]]
+                print("画框：",new_box)
+                new_box = np.array(new_box)
                 draw(im,new_box)
         base_name = os.path.basename(im_file)
         cv2.imwrite("data/pred/output1/"+str(cls)+base_name ,im)
