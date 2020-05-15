@@ -126,8 +126,9 @@ def demo(sess, net, im_file):
         # IOU过滤 后的框+概率
         # TODO write output
         for det in dets:
-            box = det[:-1]
-            draw(im,box)
+            if det[-1] > 0.8:
+                box = det[:-1]
+                draw(im,box)
         base_name = os.path.basename(im_file)
         cv2.imwrite("data/pred/output1/"+str(cls)+base_name ,im)
         # vis_detections(im, cls, dets, thresh=CONF_THRESH)
