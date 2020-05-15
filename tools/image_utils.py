@@ -12,7 +12,7 @@ import base64
 import cv2
 import numpy as np
 import logging
-from tools.tuning import RotateProcessor
+from tuning import RotateProcessor
 
 logger = logging.getLogger(__name__)
 
