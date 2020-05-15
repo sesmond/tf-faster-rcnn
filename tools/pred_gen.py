@@ -90,6 +90,7 @@ def demo(sess, net, im_file):
     timer.tic()
     scores, boxes = im_detect(sess, net, im)
     timer.toc()
+    print("图片预测结果：",scores,boxes)
     print('Detection took {:.3f}s for {:d} object proposals'.format(timer.total_time, boxes.shape[0]))
 
     # Visualize detections for each class
@@ -141,7 +142,7 @@ if __name__ == '__main__':
     input_path = "data/pred/input1"
     #TODO
     im_names = get_files(input_path)
-    print("记载的图片：",im_names)
+    print("加载的图片：",im_names)
     for im_name in im_names:
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         print('Demo for {}'.format(im_name))
