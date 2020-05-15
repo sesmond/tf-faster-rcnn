@@ -125,7 +125,13 @@ if __name__ == '__main__':
     sess = tf.Session(config=tfconfig)
 
     net = resnetv1(num_layers=101)
-    net.create_architecture("TEST", 21,
+
+    # # load model
+    # net.create_architecture("TEST", imdb.num_classes, tag='default',
+    #                         anchor_scales=cfg.ANCHOR_SCALES,
+    #                         anchor_ratios=cfg.ANCHOR_RATIOS)
+
+    net.create_architecture("TEST", 2,
                           tag='default', anchor_scales=[8, 16, 32])
     saver = tf.train.Saver()
     saver.restore(sess, tfmodel)
