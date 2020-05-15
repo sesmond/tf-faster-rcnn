@@ -26,6 +26,7 @@ import glob
 
 from nets.vgg16 import vgg16
 from nets.resnet_v1 import resnetv1
+from tools import image_utils
 
 CLASSES = ('__background__',
            'table')
@@ -84,10 +85,10 @@ def draw(im,box):
     cv2.polylines(im, [box.astype(np.int32).reshape((-1, 1, 2))], True, color=(255, 255, 0),
                                   thickness=2)
 
-def demo(sess, net, im_file):
+def demo(sess, net, im,im_name):
     """Detect object classes in an image using pre-computed object proposals."""
-    # Load the demo image
-    im = cv2.imread(im_file)
+
+    base_name = os.path.basename(im_name)
 
     # Detect all object classes and regress object bounds
     timer = Timer()
@@ -132,7 +133,6 @@ def demo(sess, net, im_file):
                 print("画框：",new_box)
                 new_box = np.array(new_box)
                 draw(im,new_box)
-        base_name = os.path.basename(im_file)
         cv2.imwrite("data/pred/output1/"+str(cls)+base_name ,im)
         # vis_detections(im, cls, dets, thresh=CONF_THRESH)
 
@@ -168,11 +168,15 @@ if __name__ == '__main__':
 
     print('Loaded network {:s}'.format(tfmodel))
 
-    input_path = "data/pred/input1"
+    input_path = "data/pred/input"
     #TODO
     im_names = get_files(input_path)
     print("加载的图片：",im_names)
     for im_name in im_names:
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         print('Demo for {}'.format(im_name))
-        demo(sess, net, im_name)
+        # Load the demo image
+        im = cv2.imread(im_name)
+        im1, im2 = image_utils.split_two(im)
+        demo(sess, net, im1,"1_"+im_name)
+        demo(sess, net, im2,"2_"+im_name)
