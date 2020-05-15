@@ -100,11 +100,16 @@ def demo(sess, net, im_file):
     NMS_THRESH = 0.3 #
     for cls_ind, cls in enumerate(CLASSES[1:]):
         cls_ind += 1 # because we skipped background
+        #TODO 4-8?  想只筛选出这个类别的box，但是逻辑没看懂
         cls_boxes = boxes[:, 4*cls_ind:4*(cls_ind + 1)]
+        print("cls_boxes:",cls_boxes.shape,cls_boxes[0])
         cls_scores = scores[:, cls_ind]
+        print("cls_scores:",cls_scores.shape,cls_scores[0])
+
+        # 合成box和框
         dets = np.hstack((cls_boxes,
                           cls_scores[:, np.newaxis])).astype(np.float32)
-        #TODO 筛选出留下的
+        #TODO NMS筛选之后剩下的
         keep = nms(dets, NMS_THRESH)
         print("keep:",keep)
         dets = dets[keep, :]
