@@ -11,6 +11,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import _init_paths
 from model.config import cfg
 from model.test import im_detect
 from model.nms_wrapper import nms
