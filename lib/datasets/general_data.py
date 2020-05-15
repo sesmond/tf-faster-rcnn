@@ -142,11 +142,11 @@ class general(imdb):
 
     def _load_pascal_annotation(self, img_name):
         """
-      TODO 改名
-      加载图片以及图片的坐标 TODO 类别呢？
-    Load image and bounding boxes info from XML file in the PASCAL VOC
-    format.
-    """
+        TODO 改名
+        加载图片以及图片的坐标 TODO 类别呢？
+        Load image and bounding boxes info from XML file in the PASCAL VOC
+         format.
+        """
         # TODO 这个和POD 数据集类似，可以参考下
         # TODO 找标签文件
         base_name = os.path.basename(img_name)
@@ -206,7 +206,7 @@ class general(imdb):
         path = os.path.join(
             self._devkit_path,
             'results',
-            'VOC' + self._year,
+            'VOC',
             'Main',
             filename)
         return path
@@ -215,6 +215,7 @@ class general(imdb):
         for cls_ind, cls in enumerate(self.classes):
             if cls == '__background__':
                 continue
+            #TODO 这咋还有模板呢？
             print('Writing {} VOC results file'.format(cls))
             filename = self._get_voc_results_file_template().format(cls)
             with open(filename, 'wt') as f:

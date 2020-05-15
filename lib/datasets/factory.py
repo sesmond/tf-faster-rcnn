@@ -80,8 +80,15 @@ if __name__ == '__main__':
     rdl_roidb.prepare_roidb(imdb)
     print('done')
 
-    roidb =  imdb.roidb
+    from utils.visualization import draw_bounding_boxes
+
+    roidb = imdb.roidb
     print("sds")
+    import  cv2
+    for im_info in roidb:
+
+        new_img = draw_bounding_boxes()
+        cv2.imwrite("data/table/" ,new_img )
     """
     [{'boxes': array([[1079,  442, 1497,  517],
        [1101,  476, 1499,  549],
@@ -91,7 +98,7 @@ if __name__ == '__main__':
 	with 3 stored elements in Compressed Sparse Row format>, 
 	'flipped': False, 
 	'seg_areas': array([31844., 29526., 36297.], dtype=float32), 
-	'image': '/Users/minjianxu/ai/git4/tf-faster-rcnn/data/images/1.jpg',
+	'image': '/1.jpg',
 	 'width': 1463, 'height': 1198, 
 	 'max_classes': array([1, 1, 1]), 
 	 'max_overlaps': array([1., 1., 1.], dtype=float32)}]
