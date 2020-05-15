@@ -178,5 +178,6 @@ if __name__ == '__main__':
         # Load the demo image
         im = cv2.imread(im_name)
         im1, im2 = image_utils.split_two(im)
+        im_name = os.path.basename(im_name)
         demo(sess, net, im1,"1_"+im_name)
         demo(sess, net, im2,"2_"+im_name)
