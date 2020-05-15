@@ -138,9 +138,10 @@ if __name__ == '__main__':
 
     print('Loaded network {:s}'.format(tfmodel))
 
-    input_path = "data/input1"
+    input_path = "data/pred/input1"
     #TODO
     im_names = get_files(input_path)
+    print("记载的图片：",im_names)
     for im_name in im_names:
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         print('Demo for {}'.format(im_name))
