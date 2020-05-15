@@ -140,7 +140,7 @@ if __name__ == '__main__':
 
     input_path = "data/input1"
     #TODO
-    im_names = get_files()
+    im_names = get_files(input_path)
     for im_name in im_names:
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         print('Demo for {}'.format(im_name))
