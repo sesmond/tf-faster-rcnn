@@ -26,7 +26,7 @@ import glob
 
 from nets.vgg16 import vgg16
 from nets.resnet_v1 import resnetv1
-from tools import image_utils
+import image_utils
 
 CLASSES = ('__background__',
            'table')
