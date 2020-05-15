@@ -90,7 +90,7 @@ def demo(sess, net, im_file):
     timer.tic()
     scores, boxes = im_detect(sess, net, im)
     timer.toc()
-    print("图片预测结果：",boxes.shape,boxes[0])
+    print("图片预测结果：",boxes.shape,boxes[0],scores[0])
     print('Detection took {:.3f}s for {:d} object proposals'.format(timer.total_time, boxes.shape[0]))
 
     # Visualize detections for each class
