@@ -90,20 +90,27 @@ def demo(sess, net, im_file):
     timer.tic()
     scores, boxes = im_detect(sess, net, im)
     timer.toc()
+    # TODO 不管什么图都是给出300个结果？ 然后根据概率筛选？去掉重叠？
+    #
     print("图片预测结果：",boxes.shape,boxes[0],scores[0])
     print('Detection took {:.3f}s for {:d} object proposals'.format(timer.total_time, boxes.shape[0]))
 
     # Visualize detections for each class
-    CONF_THRESH = 0.8
-    NMS_THRESH = 0.3
+    CONF_THRESH = 0.8 #
+    NMS_THRESH = 0.3 #
     for cls_ind, cls in enumerate(CLASSES[1:]):
         cls_ind += 1 # because we skipped background
         cls_boxes = boxes[:, 4*cls_ind:4*(cls_ind + 1)]
         cls_scores = scores[:, cls_ind]
         dets = np.hstack((cls_boxes,
                           cls_scores[:, np.newaxis])).astype(np.float32)
+        #TODO 筛选出留下的
         keep = nms(dets, NMS_THRESH)
+        print("keep:",keep)
         dets = dets[keep, :]
+        print("dets:",dets)
+        print("cls:",cls)
+
         # TODO write output
         vis_detections(im, cls, dets, thresh=CONF_THRESH)
 
