@@ -56,13 +56,12 @@ LOG="experiments/logs/${NET}_${TRAIN_IMDB}_${EXTRA_ARGS_SLUG}_${NET}.txt.`date +
 exec &> >(tee -a "$LOG")
 echo Logging output to "$LOG"
 
-set +x
 if [[ ! -z  ${EXTRA_ARGS_SLUG}  ]]; then
   NET_FINAL=output/${NET}/${TRAIN_IMDB}/${EXTRA_ARGS_SLUG}/${NET}_faster_rcnn_iter_${ITERS}.ckpt
 else
   NET_FINAL=output/${NET}/${TRAIN_IMDB}/default/${NET}_faster_rcnn_iter_${ITERS}.ckpt
 fi
-set -x
+set +x
 
 if [ ! -f ${NET_FINAL}.index ]; then
   if [[ ! -z  ${EXTRA_ARGS_SLUG}  ]]; then
@@ -96,6 +95,8 @@ if [ ! -f ${NET_FINAL}.index ]; then
 
   fi
 fi
+set -x
+
 echo "启动完毕,在logs下查看日志！"
 
 #./experiments/scripts/test_faster_rcnn.sh $@
