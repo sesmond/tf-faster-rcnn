@@ -67,7 +67,7 @@ set -x
 if [ ! -f ${NET_FINAL}.index ]; then
   if [[ ! -z  ${EXTRA_ARGS_SLUG}  ]]; then
     CUDA_VISIBLE_DEVICES=${GPU_ID}
-    nohup \
+#    nohup \
     python ./tools/trainval_net.py \
       --weight data/imagenet_weights/${NET}.ckpt \
       --imdb ${TRAIN_IMDB} \
@@ -77,12 +77,13 @@ if [ ! -f ${NET_FINAL}.index ]; then
       --tag ${EXTRA_ARGS_SLUG} \
       --net ${NET} \
       --set ANCHOR_SCALES ${ANCHORS} ANCHOR_RATIOS ${RATIOS} \
-      TRAIN.STEPSIZE ${STEPSIZE} ${EXTRA_ARGS} \
-      >> ./logs/console_$Date.log 2>&1 &
+      TRAIN.STEPSIZE ${STEPSIZE} ${EXTRA_ARGS}
+#      >> ./logs/console_$Date.log 2>&1 &
 
   else
     CUDA_VISIBLE_DEVICES=${GPU_ID}
-    nohup python ./tools/trainval_net.py \
+#    nohup python \
+     ./tools/trainval_net.py \
       --weight data/imagenet_weights/${NET}.ckpt \
       --imdb ${TRAIN_IMDB} \
       --imdbval ${TEST_IMDB} \
@@ -91,7 +92,7 @@ if [ ! -f ${NET_FINAL}.index ]; then
       --net ${NET} \
       --set ANCHOR_SCALES ${ANCHORS} ANCHOR_RATIOS ${RATIOS} \
       TRAIN.STEPSIZE ${STEPSIZE} ${EXTRA_ARGS} \
-      >> ./logs/console_$Date.log 2>&1 &
+#      >> ./logs/console_$Date.log 2>&1 &
 
   fi
 fi
