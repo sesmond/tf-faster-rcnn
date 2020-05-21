@@ -83,7 +83,7 @@ if [ ! -f ${NET_FINAL}.index ]; then
   else
     CUDA_VISIBLE_DEVICES=${GPU_ID}
 #    nohup python \
-     ./tools/trainval_net.py \
+     python ./tools/trainval_net.py \
       --weight data/imagenet_weights/${NET}.ckpt \
       --imdb ${TRAIN_IMDB} \
       --imdbval ${TEST_IMDB} \
@@ -91,7 +91,7 @@ if [ ! -f ${NET_FINAL}.index ]; then
       --cfg experiments/cfgs/${NET}.yml \
       --net ${NET} \
       --set ANCHOR_SCALES ${ANCHORS} ANCHOR_RATIOS ${RATIOS} \
-      TRAIN.STEPSIZE ${STEPSIZE} ${EXTRA_ARGS} \
+      TRAIN.STEPSIZE ${STEPSIZE} ${EXTRA_ARGS}
 #      >> ./logs/console_$Date.log 2>&1 &
 
   fi
